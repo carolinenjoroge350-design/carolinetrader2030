@@ -1,11 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 export default function Home() {
   const handleLogin = () => {
-    // Badilisha namba 0000 na uweke namba yako ya kweli ya App ID ya Deriv
-    const appId = '0000'; 
+    // Your actual Deriv App ID is configured here
+    const appId = '33LvXr02jabdvOWfNQ5hZ'; 
     const redirectUrl = encodeURIComponent('https://netlify.app');
     window.location.href = `https://deriv.com{appId}&l=en&redirect_uri=${redirectUrl}`;
   };
@@ -15,14 +13,14 @@ export default function Home() {
       <h1 style={{ fontSize: '28px', marginBottom: '10px', fontWeight: 'bold' }}>Caroline Trader</h1>
       <p style={{ color: '#94a3b8', marginBottom: '30px' }}>Digit Analysis Dashboard</p>
       
-      {/* Kitufe kikubwa cha login */}
+      {/* Orange Login Button */}
       <button 
         onClick={handleLogin} 
         style={{ backgroundColor: '#f97316', color: 'white', padding: '15px 30px', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: 'bold', cursor: 'pointer', width: '100%', maxWidth: '300px' }}
       >
-        Ingia na Akaunti ya Deriv (Login via Deriv)
+        Login via Deriv
       </button>
     </div>
   );
                  }
-        
+          
