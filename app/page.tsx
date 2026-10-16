@@ -1,25 +1,10 @@
 
 'use client';
 
-import { useEffect } from 'react';
+import { useAuth } from '@/hooks/use-auth';
 
 export default function Home() {
-  useEffect(() => {
-    const appId = process.env.NEXT_PUBLIC_DERIV_APP_ID;
-    const redirectUrl = 'https://carolinetrader2030.netlify.app';
-
-    if (!appId) {
-      console.error('Missing Deriv App ID');
-      return;
-    }
-
-    const url = new URL('https://oauth.deriv.com/oauth2/authorize');
-    url.searchParams.set('app_id', appId);
-    url.searchParams.set('l', 'EN');
-    url.searchParams.set('redirect_uri', redirectUrl);
-
-    window.location.assign(url.toString());
-  }, []);
+  const { login, authState, error } = useAuth();
 
   return (
     <main style={{
@@ -34,8 +19,26 @@ export default function Home() {
     }}>
       <div>
         <h1>Caroline Trader</h1>
-        <p>Connecting securely to Deriv...</p>
+        <p>Connect your Deriv account to continue.</p>
+
+        <button
+          onClick={() => login()}
+          style={{
+            background: '#ff444f',
+            color: 'white',
+            padding: '14px 28px',
+            border: 'none',
+            borderRadius: 8,
+            fontSize: 16
+          }}
+        >
+          {authState === 'authenticating'
+            ? 'Connecting...'
+            : 'Login to Deriv'}
+        </button>
+
+        {error && <p>{error}</p>}
       </div>
     </main>
   );
-      }
+          }
